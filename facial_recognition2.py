@@ -14,7 +14,7 @@ for (subdirecteories,directeories,files) in os.walk(data):
         subject_path = os.path.join(data,subdirectory)
         for filename in os.listdir(subject_path):
             path = os.path.join(subject_path,filename)
-            image = cv2.imread(path)
+            image = cv2.imread(path,0)
             images.append(image)
             label = id
             labels.append(label)
@@ -37,9 +37,9 @@ while True:
          face_resize = cv2.resize(face,(130,100))
          label,score = model.predict(face_resize)
          if score < 500:
-             cv2.putText(frame,"%s-%.0f"%(names[label],score),(30,10),font = cv2.FONT_ITALIC,fontScale= 1,color= (255,0,0))
+             cv2.putText(frame,"%s-%.0f"%(names[label],score),(30,30),fontFace= cv2.FONT_HERSHEY_COMPLEX_SMALL,fontScale= 1,color= (255,0,0))
          else:
-             cv2.putText(frame,"PERSON NOT IDENTIFIED",(30,10),font = cv2.FONT_ITALIC,fontScale= 1,color=(0,0,255))
+             cv2.putText(frame,"PERSON NOT IDENTIFIED",(30,30),fontFace= cv2.FONT_HERSHEY_COMPLEX_SMALL,fontScale= 1,color=(0,0,255))
 
      cv2.imshow("text",frame)
      key = cv2.waitKey(10)
